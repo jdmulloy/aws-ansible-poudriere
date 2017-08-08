@@ -1,0 +1,4 @@
+jdmulloy_poudriere_packages:
+    - poudriere
+    - awscli
+jdmulloy_poudriere_base_dir: /usr/local/poudriere

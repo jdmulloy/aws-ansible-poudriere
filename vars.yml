@@ -1,0 +1,147 @@
+jdmulloy_poudriere_portstree_branch: quarterly
+jdmulloy_poudriere_environments:
+    "FreeBSD:11:amd64":
+        version: '11.1-RELEASE'
+        arch: 'amd64'
+        portstree: 'default'
+        make_options:
+            - "WITH_PKGNG=yes"
+            - "OPTIONS_SET+= GSSAPI_NONE"
+            - "OPTIONS_SET+= SASL"
+            - "OPTIONS_SET+= SSL"
+            - "OPTIONS_SET+= TLS"
+            - "OPTIONS_SET+= SPF"
+            - "OPTIONS_SET+= DOVECOT2"
+            - "OPTIONS_SET+= DNS_BINDTOOLS"
+            - "OPTIONS_SET+= OPENPTY"
+            - "OPTIONS_UNSET+= DNS_BASE"
+            - "OPTIONS_UNSET+= GSSAPI_BASE"
+            - "OPTIONS_UNSET+= GTK2"
+            - "OPTIONS_UNSET+= X11"
+            - "WITH_SSL=YES"
+            - "DEFAULT_VERSIONS= mysql=10.0m"
+            - "WITH_OPENSSL_PORT=YES"
+            - "APACHE_PORT=www/apache24"
+            - "APACHE_VERSION=24"
+            - "ftp_curl_UNSET+= TLS_SRP"
+            - "graphics_cairo_SET+= X11"
+            - "mail_opensmtpd_SET+= MAILERCONF"
+            - "opensmtpd_SET+= MAILERCONF"
+            - "security_p5-GSSAPI_UNSET+= GSSAPI_BASE"
+            - "security_p5-GSSAPI_SET+= GSSAPI_MIT"
+            - "www_lynx_SET+= DEFAULT_COLORS"
+            - "www_nginx_SET+= PASSENGER"
+        packages:
+            - archivers/p7zip
+            - benchmarks/iperf
+            - benchmarks/iperf5
+            - databases/mariadb100-client
+            - databases/mariadb100-server
+            - databases/mariadb102-client
+            - databases/mariadb102-server
+            - databases/mongodb32
+            - databases/mytop 
+            - databases/redis
+            - devel/git
+            - devel/git-lite
+            - devel/godep
+            - devel/pkgconf
+            - devel/py-boto
+            - devel/py-six
+            - devel/py-virtualenv
+            - devel/subversion
+            - dns/bind-tools
+            - dns/bind910
+            - dns/nss_mdns
+            - editors/vim-lite
+            - emulators/qemu
+            - emulators/qemu-devel
+            - ftp/curl
+            - ftp/wget
+            - irc/irssi
+            - lang/go
+            - mail/dovecot2
+            - mail/dovecot2-pigeonhole
+            - mail/mutt
+            - mail/opendkim
+            - mail/opensmtpd
+            - mail/postfix
+            - misc/ttyrec
+            - multimedia/ffmpeg
+        # Build currently broken
+        #    - multimedia/mythtv
+        #    - multimedia/mythtv-frontend
+            - net/bird
+            - net/bird6
+            - net/netatalk3
+            - net/mosh
+            - net/ntp
+            - net/p5-Net-Whois-IP
+            - net/rsync
+            - net/wol
+            - net-mgmt/nagios4
+            - net-mgmt/nagios-check_email_delivery
+            - net-mgmt/zabbix3-agent
+            - net-mgmt/zabbix3-frontend
+            - net-mgmt/zabbix3-server
+            - net-mgmt/zabbix32-agent
+            - net-mgmt/zabbix32-frontend
+            - net-mgmt/zabbix32-server
+            - ports-mgmt/dialog4ports
+            - ports-mgmt/pkg
+            - ports-mgmt/poudriere
+            - print/cups
+            - security/ca_root_nss
+            - security/doas
+            - security/nmap
+            - security/openvpn
+            - security/sudo
+            - sysutils/apcupsd
+            - sysutils/ansible
+            - sysutils/beats
+            - sysutils/bhyve-firmware
+            - sysutils/cdrtools-devel
+            - sysutils/ezjail
+            - sysutils/fdupes
+            - sysutils/fusefs-ntfs
+            - sysutils/grub2-bhyve
+            - sysutils/iohyve
+            - sysutils/logstash
+            - sysutils/pstree
+            - sysutils/puppet4
+            - sysutils/puppetserver
+            - sysutils/smartmontools
+            - sysutils/tarsnap
+            - sysutils/tmux
+            - sysutils/tree
+            - sysutils/rubygem-winrm
+            - sysutils/zfs-snapshot-mgmt
+            - sysutils/zfsnap
+            - sysutils/zxfer
+            - textproc/elasticsearch2
+            - textproc/jq
+            - textproc/kibana45
+            - www/fcgiwrap
+            - www/lynx
+            - www/nextcloud
+            - www/nginx
+            - www/spawn-fcgi
+    "FreeBSD:11:amd64-py3":
+        version: '11.1-RELEASE'
+        arch: 'amd64'
+        portstree: 'default'
+        make_options:
+            - "DEFAULT_VERSIONS= python=3.5"
+        packages:
+            - mail/postfix-policyd-spf-python
+    "FreeBSD:11:amd64-acme":
+        version: '11.1-RELEASE'
+        arch: 'amd64'
+        portstree: 'default'
+        make_options:
+            - "DEFAULT_VERSIONS= ssl=libressl"
+        packages:
+            - dns/bind-tools
+            - mail/opensmtpd
+            - security/acme-client
+            - sysutils/puppet4

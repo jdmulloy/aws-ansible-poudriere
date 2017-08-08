@@ -1,0 +1,4 @@
+- name: Setup Poudriere
+  hosts: all
+  roles:
+    - role: poudriere

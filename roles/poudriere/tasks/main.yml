@@ -1,0 +1,50 @@
+- name: Install required packages
+  pkgng: name={{ item }} state=present
+  with_items: "{{ jdmulloy_poudriere_packages }}"
+- name: Create Poudriere configuration file
+  template:
+      src: poudriere.conf.j2
+      dest: /usr/local/etc/poudriere.conf
+      #- name: Create Poudriere make.conf file
+      #  template:
+      #      src: poudriere.conf.j2
+      #      dest: /usr/local/etc/poudriere.conf
+- name: Install default portstree
+  command: /usr/local/bin/poudriere ports -c -m portsnap -B "{{ jdmulloy_poudriere_portstree_branch }}"
+  args:
+      creates: "{{ jdmulloy_poudriere_base_dir }}/ports/default"
+
+- name: "Create poudriere jails"
+  command: /usr/local/bin/poudriere jail -c -j "{{ item.key }}" -v "{{ item.value.version }}" -a "{{ item.value.arch }}" -p "{{ item.value.portstree }}"
+  args:
+      creates: "{{ jdmulloy_poudriere_base_dir }}/jails/{{ item.key }}"
+  with_dict: "{{ jdmulloy_poudriere_environments }}"
+
+- name: "Create poudriere jails make.conf"
+  template:
+      src: make.conf.j2
+      dest: "/usr/local/etc/poudriere.d/{{ item.key }}-make.conf"
+  with_dict: "{{ jdmulloy_poudriere_environments }}"
+
+- name: "Create poudriere jails package list"
+  copy:
+      content: "{{ '\n'.join(item.value.packages) }}"
+      dest: "/usr/local/etc/poudriere.d/{{ item.key }}.list"
+  with_dict: "{{ jdmulloy_poudriere_environments }}"
+
+- name: Create /l/bin
+  file:
+      path: /l/bin
+      state: directory
+
+- name: "Create {{ jdmulloy_poudriere_base_dir }}/distfiles"
+  file:
+      path: "{{ jdmulloy_poudriere_base_dir }}/distfiles"
+      state: directory
+
+- name: Create build script
+  template:
+      src: build.sh.j2
+      dest: "/l/bin/build.sh"
+      mode: 755
+
