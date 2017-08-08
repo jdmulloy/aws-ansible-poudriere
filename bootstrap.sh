@@ -7,5 +7,5 @@ pkg install -y ansible git-lite
 mkdir /git
 cd /git
 /usr/local/bin/git clone https://github.com/jdmulloy/aws-ansible-poudriere.git
-cd aws-ansible/poudriere
+cd /git/aws-ansible-poudriere
 ./run_ansible.sh
