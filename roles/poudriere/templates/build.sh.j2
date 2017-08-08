@@ -8,15 +8,18 @@ PROCESS_COUNT={{ ansible_processor_count }}
 TIMESTAMP=$(date "+%Y-%m-%d_%H-%M")
 LOG="/var/log/poudriere_${TIMESTAMP}"
 
+echo "START: $(date)" >> ${LOG}
+
 # Update ports tree
-/usr/local/bin/poudriere ports -u -p default
+/usr/local/bin/poudriere ports -u -p default >> ${LOG}
 
 for JAIL in ${JAILS}; do
-/usr/local/bin/poudriere bulk -f /usr/local/etc/poudriere.d/${JAIL}.list -j ${JAIL} -J ${PROCESS_COUNT} -p default -T
-/usr/local/bin/poudriere pkgclean -f /usr/local/etc/poudriere.d/${JAIL}.list -j ${JAIL} -J ${PROCESS_COUNT} -p default >> /var/log/poudriere
+/usr/local/bin/poudriere bulk -f /usr/local/etc/poudriere.d/${JAIL}.list -j ${JAIL} -J ${PROCESS_COUNT} -p default -T >> ${LOG}
+/usr/local/bin/poudriere pkgclean -f /usr/local/etc/poudriere.d/${JAIL}.list -j ${JAIL} -J ${PROCESS_COUNT} -p default >> ${LOG}
 done
 
 # TODO: Upload to S3
+echo "END: $(date)" >> ${LOG}
 # TODO: Send email with output
 
 # TODO: Make shutdown robust
