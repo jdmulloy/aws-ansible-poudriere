@@ -34,7 +34,7 @@ jdmulloy_poudriere_environments:
         packages:
             - archivers/p7zip
             - benchmarks/iperf
-            - benchmarks/iperf5
+            - benchmarks/iperf3
             - databases/mariadb100-client
             - databases/mariadb100-server
             - databases/mariadb102-client
@@ -60,8 +60,8 @@ jdmulloy_poudriere_environments:
             - ftp/wget
             - irc/irssi
             - lang/go
-            - mail/dovecot2
-            - mail/dovecot2-pigeonhole
+            - mail/dovecot
+            - mail/dovecot-pigeonhole
             - mail/mutt
             - mail/opendkim
             - mail/opensmtpd
