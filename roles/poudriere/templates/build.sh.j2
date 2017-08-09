@@ -23,4 +23,7 @@ echo "END: $(date)" >> ${LOG}
 # TODO: Send email with output
 
 # TODO: Make shutdown robust
-#/sbin/shutdown -p now
+SLEEP=60
+echo "Build completed, shutting down in ${SLEEP} seconds"
+sleep ${SLEEP}
+/sbin/shutdown -p now
