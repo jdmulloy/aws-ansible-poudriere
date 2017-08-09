@@ -5,10 +5,7 @@
   template:
       src: poudriere.conf.j2
       dest: /usr/local/etc/poudriere.conf
-      #- name: Create Poudriere make.conf file
-      #  template:
-      #      src: poudriere.conf.j2
-      #      dest: /usr/local/etc/poudriere.conf
+
 - name: Install default portstree
   command: /usr/local/bin/poudriere ports -c -m portsnap -B "{{ jdmulloy_poudriere_portstree_branch }}"
   args:
