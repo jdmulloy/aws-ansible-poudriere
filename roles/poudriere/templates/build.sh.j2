@@ -6,7 +6,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
 JAILS="{{ ' '.join(jdmulloy_poudriere_environments.keys()) }}"
 PROCESS_COUNT={{ ansible_processor_count }}
 TIMESTAMP=$(date "+%Y-%m-%d_%H-%M")
-LOG="/var/log/poudriere_${TIMESTAMP}"
+LOG="/var/log/poudriere/poudriere_${TIMESTAMP}"
 
 echo "START: $(date)" >> ${LOG}
 

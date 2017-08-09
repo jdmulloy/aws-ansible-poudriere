@@ -34,6 +34,11 @@
       path: /l/bin
       state: directory
 
+- name: Create /var/log/poudriere
+  file:
+      path: /var/log/poudriere
+      state: directory
+
 - name: "Create {{ jdmulloy_poudriere_base_dir }}/distfiles"
   file:
       path: "{{ jdmulloy_poudriere_base_dir }}/distfiles"
